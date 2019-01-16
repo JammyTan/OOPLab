@@ -1,0 +1,73 @@
+<div class="parallax-container">
+    <div class="section">
+        <span class="container center-align">
+            <br>
+            <br>
+            <h1 class="grey-text text-darken-3 center">OOP 物件導向實習課程</h1>
+            <form name="form">
+                <div class="row">
+                    <div class="input-field col offset-s2 s8">
+                        <input id="id" type="text" class="validate" ng-model="form.id" required>
+                        <label for="id">學號</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col offset-s2 s8">
+                        <input id="password" type="password" class="validate" ng-model="form.password" required>
+                        <label for="password">密碼</label>
+                    </div>
+                </div>
+                <button ng-click="form.$invalid || login()" class="btn waves-effect waves-light" type="submit"
+                        name="action" ng-disabled="form.$invalid">
+                    Login
+                    <i class="material-icons right">send</i>
+                </button>
+                <!--<span data-target="forgot-modal" class="margin-left-1x teal-text text-darken-1 modal-trigger clickable">-->
+                    <!--忘記密碼?-->
+                <!--</span>-->
+            </form>
+            <!--<div id="forgot-modal" class="modal">-->
+                <!--<div class="modal-content">-->
+                    <!--<h4>請輸入你的學號，將會寄信到你的學校信箱</h4>-->
+                    <!--<form name="forgotForm">-->
+                        <!--<div class="row">-->
+                            <!--<div class="input-field col offset-s2 s8">-->
+                                <!--<input id="student-id" type="text" class="validate"-->
+                                       <!--ng-model="forgotStudentId"-->
+                                       <!--required>-->
+                                <!--<label for="id">學號</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<button ng-click="forgotForm.$invalid || submitForgot()"-->
+                                <!--class="btn waves-effect waves-light" type="submit"-->
+                                <!--name="action" ng-disabled="forgotForm.$invalid">-->
+                            <!--送出-->
+                            <!--<i class="material-icons right">send</i>-->
+                        <!--</button>-->
+                    <!--</form>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+
+                <!--</div>-->
+            <!--</div>-->
+            <!--<a class="waves-effect waves-light btn-large center-align">Login</a>-->
+            <br>
+            <br>
+        </span>
+    </div>
+    <div class="parallax"><img src="/images/ntut.jpg"></div>
+</div>
+
+</div>
+<div class="section white">
+    <div class="row container">
+        <div class="col s12">
+            <h2 class="header">
+                <a class="grey-text text-darken-3 lighten-3" href="http://www.cc.ntut.edu.tw/~wkchen/game/">課程網站</a>
+            </h2>
+        </div>
+    </div>
+</div>
+<div class="parallax-container">
+    <div class="parallax"><img src="/images/ntut.jpg"></div>
+</div>

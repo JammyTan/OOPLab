@@ -1,0 +1,533 @@
+<div ng-if="isLogin">
+    <nav class="teal lighten-2">
+        <div class="nav-wrapper">
+            <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="hide-on-med-and-down">
+                <li class="clickable" ng-click="changeState('index')"><a>首頁</a></li>
+                <li class="clickable" ng-if="project && group" ng-click="changeState('project')"><a>專案進度</a></li>
+                <li class="clickable" ng-click="changeState('editGroup')"><a>編輯團隊</a></li>
+                <li class="clickable" ng-if="hasGroup()" ng-click="changeState('editProject')"><a>編輯專案</a></li>
+                <li class="clickable" ng-click="changeState('group')"><a>班級所有團隊</a></li>
+                <li class="clickable" ng-click="changeState('homework')"><a>練習進度</a></li>
+                <li class="clickable" ng-click="changeState('rollCall')"><a>缺課紀錄</a></li>
+                <li class="clickable" ng-click="changeState('setting')"><a>設定</a></li>
+
+            </ul>
+            <ul class="side-nav" id="mobile-nav">
+                <li class="clickable" ng-click="changeState('index')"><a>首頁</a></li>
+                <li class="clickable" ng-if="project && group" ng-click="changeState('project')"><a>專案進度</a></li>
+                <li class="clickable" ng-click="changeState('editGroup')"><a>編輯團隊</a></li>
+                <li class="clickable" ng-if="hasGroup()" ng-click="changeState('editProject')"><a>編輯專案</a></li>
+                <li class="clickable" ng-click="changeState('group')"><a>班級所有團隊</a></li>
+                <li class="clickable" ng-click="changeState('homework')"><a>練習進度</a></li>
+                <li class="clickable" ng-click="changeState('setting')"><a>設定</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div ng-if="loading" class="loading-wrapper">
+        <div class="preloader-wrapper big active loading">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-if="!loading" class=" pad-top" ng-switch="state">
+
+        <div ng-switch-when="index">
+            <div class="row">
+                <div class="col s6">
+                    <!--<div id="commitChart" class="wrap-margin" style="width:100%; height:400px;"></div>-->
+                    <div class="commit-Rank">
+                        <text>Commit 次數</text>
+                        <div class="rank-mask">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>專案名稱</th>
+                                    <th>commit次數</th>
+                                </tr>
+                                <tr ng-if="project.id">
+                                    <td>{{findGroupCommitsRank(project.id)}}</td>
+                                    <td>{{project.project_type}}: {{project.name}}</td>
+                                    <td>{{findGroupCommitsAmount(project.id)}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="group in groupCommitsRank" ng-if="group.project">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{group.project.project_type}}: {{group.project.name}}</td>
+                                    <td>{{group.project.total_commits}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div id="locChart" class="wrap-margin" style="width:100%; height:400px;"></div>
+                    <!--<div class="commit-Rank">-->
+                        <!--<text>程式變動行數</text>-->
+                        <!--<div class="rank-mask">-->
+                            <!--<table>-->
+                                <!--<thead>-->
+                                <!--<tr>-->
+                                    <!--<th>排名</th>-->
+                                    <!--<th>專案名稱</th>-->
+                                    <!--<th>行數</th>-->
+                                <!--</tr>-->
+                                <!--<tr ng-if="project.id">-->
+                                    <!--<td>{{findGroupLocRank(project.id)}}</td>-->
+                                    <!--<td>{{project.project_type}}: {{project.name}}</td>-->
+                                    <!--<td>{{findGroupLocAmount(project.id)}}</td>-->
+                                <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                <!--<tr ng-repeat="group in groupCommitsRank" ng-if="group.project">-->
+                                    <!--<td>{{$index+1}}</td>-->
+                                    <!--<td>{{group.project.project_type}}: {{group.project.name}}</td>-->
+                                    <!--<td>{{group.project.total_loc}}</td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="row">
+                    <div id="timelogChart" class="wrap-margin" style="width:100%; height:400px;"></div>
+                </div>
+
+                <!--<div class="col s3">-->
+                <!--<div class="ticker-wrapper blue lighten-2">-->
+                <!--<h5>Latest Activity</h5>-->
+                <!--<ul id="ticker">-->
+                <!--</ul>-->
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+            <!--<div class="col s6">-->
+            <!--<div id="timelogChart" class="wrap-margin" style="width:100%; height:400px;"></div>-->
+            <!--</div>-->
+
+        </div>
+        <div ng-switch-when="project" class="container">
+            <div ng-if="project">
+                <h3>{{project.name}}</h3>
+                <h5 class="color-red" ng-if="locDiff">與上週相比行數沒有變化！加油！</h5>
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th data-field="weekNo">驗收</th>
+                        <th data-field="weekNo">週次</th>
+                        <th data-field="date">日期</th>
+                        <th data-field="costTime">花費時間(不含上課)</th>
+                        <th data-field="todoList">工作規劃</th>
+                        <th data-field="lineOfCode">行數</th>
+                        <th data-field="image">圖片</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="timelog in timelogs"
+                        data-target="editting-time-cost">
+                        <td>
+                            <input type="checkbox"
+                                   class="filled-in"
+                                   ng-attr-id="acceptance-checkbox{{timelog.id}}"
+                                   ng-model="timelog.acceptance"
+                                   disabled="disabled"/>
+                            <label ng-attr-for=="acceptance-checkbox{{timelog.id}}"></label>
+                        </td>
+                        <td>{{timelog.week_no}}</td>
+                        <td><p style="white-space: pre;">{{timelogs | dateRange:$index}}</p></td>
+                        <td>
+                            <div ng-repeat="student in group.members" class="margin-top-1x">
+                                <div ng-if="timelog.sum_cost[student.id]">{{student.name}}:
+                                    {{timelog.sum_cost[student.id]}}小時
+                                </div>
+                                <div ng-if="!timelog.sum_cost[student.id]" class="red-text text-darken-1">
+                                    {{student.name}}: 未填寫
+                                </div>
+                            </div>
+                        </td>
+                        <td class="todo-table-cell">
+                            <div class="work-breakable" ng-if="timelog.todo && !timelog.editting">{{timelog.todo}}</div>
+                            <div ng-if="!timelog.todo && !timelog.editting" class="red-text text-darken-1">未填寫</div>
+                            <div class="input-field" ng-if="timelog.editting">
+                                <input id="todo" type="text" class="validate" ng-model="timelog.todo" required>
+                                <label class='active' for="todo">工作規劃</label>
+                            </div>
+                        </td>
+                        <td>
+                            <span ng-if="timelog.loc!=0">{{timelog.loc}}</span>
+                            <span ng-if="timelog.loc==0">NA</span>
+                        </td>
+                        <td>
+                            <div class="image-wrapper" ng-if="timelog.editting">
+                                <img class="responsive-img" id="image_upload_preview" ng-src="{{timelog.image_url}}"/>
+                                <input type="file" name="userprofile_picture" id="filePhoto"/>
+                                <span class="upload-img-tip" ng-if="!timelog.image_url">請點我上傳圖片</span>
+                            </div>
+                            <div class="image-wrapper" ng-if="timelog.image_url && !timelog.editting">
+                                <img class="materialboxed" ng-src="{{timelog.image_url}}">
+                            </div>
+                        </td>
+                        <td ng-if="!timelog.editting">
+                            <div class="row">
+                                <a class="waves-effect waves-light btn" ng-click="openTimeCostModal(timelog)">編輯花費時間</a>
+                            </div>
+                            <div class="row">
+                                <a class="waves-effect waves-light btn" ng-click="editTimelog(timelog)">編輯工作規劃</a>
+                            </div>
+                        </td>
+                        <td ng-if="timelog.editting">
+                            <div class="row">
+                                <a class="waves-effect waves-light btn" ng-click="edittingTimelog(timelog)">修改</a>
+                            </div>
+                            <div class="row">
+                                <a class="waves-effect waves-light btn" ng-click="cancelEditTimelog(timelog)">取消</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div id="editting-time-cost" class="modal">
+                    <div class="modal-content">
+                        <h4>花費時間</h4>
+                        <table class="striped">
+                            <thead>
+                            <tr>
+                                <th data-field="category">類別</th>
+                                <th data-field="cost">耗費小時</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="timeCost in selectedTimelog.time_costs">
+                                <td>{{timeCost.category | timeCostCategory}}</td>
+                                <td>{{timeCost.cost}}</td>
+                                <td>
+                                    <div>
+                                        <a class="waves-effect waves-light btn" ng-click="deleteTimeCost(timeCost.id)">刪除</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <form name="timeCostForm">
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    <select ng-model="addTimeCostForm.category" required>
+                                        <option value="" disabled selected>請選擇類別</option>
+                                        <option value="0">程式撰寫</option>
+                                        <option value="1">程式規劃</option>
+                                        <option value="2">找尋素材</option>
+                                        <option value="3">素材整理</option>
+                                        <option value="4">團隊討論</option>
+                                    </select>
+                                </div>
+                                <div class="input-field col s3">
+                                    <input id="time-cost-id"
+                                           type="text"
+                                           class="validate"
+                                           ng-model="addTimeCostForm.cost"
+                                           ng-pattern="'\\d+(\.{0,1}\\d{0,1})'"
+                                           required>
+                                    <label for="time-cost-id">耗費小時</label>
+                                </div>
+
+                            </div>
+                            <button ng-click="timeCostForm.$invalid || addTimeCost()"
+                                    ng-disabled="timeCostForm.$invalid"
+                                    class="waves-effect waves-light btn center-align">新增花費時間
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-switch-when="group" class="container">
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th data-field="id">組別</th>
+                    <th data-field="name">學號</th>
+                    <th data-field="name">學生</th>
+                    <th data-field="name">專案名稱</th>
+                    <th data-field="middleGrade">Demo1成績</th>
+                    <th data-field="finalGrade">Demo2成績</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="group in groups">
+                    <td>{{$index + 1}}</td>
+                    <td>{{group.students | studentsId}}</td>
+                    <td>{{group.students | studentsName}}</td>
+                    <td>{{group.project.project_type}}: {{group.project.name}}</td>
+                    <td ng-class="{red: group.project.average_point[0]<=60, 'lighten-4': group.project.average_point[0]<=60}">{{group.project.average_point[0] | grade}}</td>
+                    <td ng-class="{red: group.project.average_point[1]<=60, 'lighten-4': group.project.average_point[1]<=60}">{{group.project.average_point[1] | grade}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+            <div class="section">
+                <h5>尚未分組的學生</h5>
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th data-field="name">學號</th>
+                        <th data-field="name">學生</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="student in studentsWithoutGroup">
+                        <td>{{student.id}}</td>
+                        <td>{{student.name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-switch-when="homework" class="container homework">
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th data-field="id">學號</th>
+                    <th data-field="name">姓名</th>
+                    <th ng-repeat="homework in homeworks">{{homework.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="student in students">
+                    <td>{{student.id}}</td>
+                    <td>{{student.name}}</td>
+                    <td ng-repeat="homework in homeworks">
+                        <input type="checkbox"
+                               class="filled-in"
+                               ng-attr-id="{{'checkbox' + student.id + homework.id}}"
+                               ng-model="student.deliver[homework.id]"
+                               disabled="disabled"
+                               ng-change="submitHomeworkState(student.deliver[homework.id], homework.id, student.id)"/>
+                        <label ng-attr-for="{{'checkbox' + student.id + homework.id}}"></label>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-switch-when="rollCall" class="container">
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th data-field="id">日期</th>
+                    <th data-field="name">節次</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="rollCall in me.roll_calls">
+                    <td>{{rollCall.date}}</td>
+                    <td>{{rollCall.period+1}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-switch-when="editGroup" class="container">
+            <div ng-if="!hasGroup()">
+                <h3>你目前不屬於任何團隊</h3>
+                <form name="groupCreateForm">
+                    <div class="row">
+                        <div class="col s8">
+                            <input name="onlyMe" ng-model="groupForm.onlyMe" type="checkbox" class="filled-in"
+                                   id="filled-in-box" checked="checked">
+                            <label for="filled-in-box">自己一個人一組</label>
+                        </div>
+                        <div class="input-field col s8">
+                            <input ng-disabled="groupForm.onlyMe"
+                                   id="group-id"
+                                   name="studentId"
+                                   type="text"
+                                   class="validate"
+                                   ng-model="groupForm.studentId"
+                                   ng-pattern="'\\d+'"
+                                   required>
+                            <label for="group-id">對方組員學號</label>
+                        </div>
+                    </div>
+                    <button ng-click="(groupCreateForm.$invalid && !groupForm.onlyMe) || createGroup()"
+                            ng-disabled="groupCreateForm.$invalid && !groupForm.onlyMe"
+                            class="waves-effect waves-light btn-large center-align">建立團隊
+                    </button>
+                </form>
+            </div>
+            <div ng-if="hasGroup()">
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th data-field="id">組員學號</th>
+                        <th data-field="name">組員姓名</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="student in group.members">
+                        <td>{{student.id}}</td>
+                        <td>{{student.name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div data-target="destroy-model"
+                     class="waves-effect waves-light btn modal-trigger">解散團隊
+                </div>
+                <div id="destroy-model" class="modal">
+                    <div class="modal-content">
+                        <h4>確定要解散團隊嗎?</h4>
+                        <h6 class="materialize-red-text">注意！解散團隊後之前的timelog、專案、git等資訊皆會消失</h6>
+                        <h6 class="materialize-red-text">解散前請先找TA討論</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="modal-action modal-close waves-effect waves-red red waves-ripple btn destroy-cancel-btn">否</a>
+
+                        <a ng-click="destroyGroup()"
+                           class=" modal-action modal-close waves-effect waves-green btn">是</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div ng-switch-when="editProject" class="container">
+
+            <div ng-if="!project">
+                <h3>你尚未建立專案</h3>
+            </div>
+            <form name="projectCreateForm">
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input id="project-id" type="text" class="validate" ng-model="projectForm.name" required>
+                        <label class='active' for="project-id">專案題目</label>
+                    </div>
+                    <div class="input-field col s8">
+                        <input id="project-ref" type="text" class="validate" ng-model="projectForm.refUrl" required>
+                        <label class='active' for="project-ref">參考連結</label>
+                    </div>
+                    <div class="input-field col s8">
+                        <select ng-model="projectForm.type" require>
+                            <option value="default" disabled selected>專案平台</option>
+                            <option value="Android">Android</option>
+                            <option value="Windows">Windows</option>
+                            <option value="HTML5">HTML5</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s8">
+                            <textarea id="project-textarea" class="materialize-textarea"
+                                      ng-model="projectForm.description"></textarea>
+                        <label class='active' for="project-textarea">專案簡介</label>
+                    </div>
+                    <div class="input-field col s8">
+                        <input id="git-url" type="text" class="validate" ng-model="project.gitUrl" readonly>
+                        <label class='active' for="git-url">Git連結</label>
+                    </div>
+                </div>
+                <div ng-if="!project">
+                    <button ng-click="groupCreateForm.$invalid || createProject()"
+                            class="waves-effect waves-light btn-large center-align"
+                            ng-disabled="projectCreateForm.$invalid">建立專案
+                    </button>
+                </div>
+                <div ng-if="project">
+                    <button ng-click="groupCreateForm.$invalid || editProject()"
+                            class="waves-effect waves-light btn-large center-align"
+                            ng-disabled="projectCreateForm.$invalid">修改專案
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <div ng-switch-when="setting" class="container">
+            <div class="section container">
+                <ul class="collapsible popout" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">toc</i>更改密碼</div>
+                        <div class="collapsible-body container">
+                            <form name="passwordFormName">
+                                <div class="row">
+                                    <div class="input-field col s8 offset-s2">
+                                        <input id="passwordForm-password" type="password" class="validate"
+                                               ng-model="passwordForm.password" required>
+                                        <label for="passwordForm-password">密碼</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s8 offset-s2">
+                                        <input id="passwordForm-confirmPassword" type="password" class="validate"
+                                               ng-model="passwordForm.confirmPassword" required
+                                               compare-password="passwordForm.password">
+                                        <label for="passwordForm-confirmPassword">再次輸入密碼</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <button ng-click="passwordFormName.$invalid || resetPassword()"
+                                            class="btn waves-effect waves-light"
+                                            type="submit"
+                                            name="action"
+                                            ng-disabled="passwordFormName.$invalid">
+                                        確認更改
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="progress" ng-if="requestLoading">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+</div>

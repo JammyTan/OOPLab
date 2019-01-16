@@ -1,0 +1,36 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/gcaaa31928/CourseWeb",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "1.0.2",
+    "Materialize": "materialize#0.97.5",
+    "angular-ui-router": "0.2.15",
+    "angular": "1.4.8",
+    "angular-route": "1.4.8",
+    "angular-animate": "1.4.8",
+    "jquery": "2.2.0",
+    "Headhesive.js": "headhesive#1.2.4",
+    "highcharts": "hightcharts#4.2.1",
+    "js-base64": "2.1.9",
+    "ngstorage": "0.3.10",
+    "async": "1.5.2",
+    "pikaday": "1.4.0",
+    "js-yaml": "3.5.3",
+    "moment": "2.11.2",
+    "animate.css": "3.5.1",
+    "dropzone": "4.3.0",
+    "font-awesome": "fontawesome#4.5.0",
+    "sweetalert2": "^6.4.4"
+  }
+}

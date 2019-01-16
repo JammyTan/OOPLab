@@ -1,0 +1,13 @@
+@import "mixin";
+
+.parallax-container:nth-of-type(1) {
+    max-height: 460px;
+}
+
+.parallax-container {
+    max-height: 260px;
+}
+
+.parallax > img {
+    @include filter(blur(15px) brightness(1.2));
+}

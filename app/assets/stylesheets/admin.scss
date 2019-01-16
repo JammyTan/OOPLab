@@ -1,0 +1,23 @@
+// Place all the styles related to the admin controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.sidebar {
+
+}
+
+.wide.container {
+    width: 90% !important;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+
+.striped{
+  .score-input{
+    width: 85px;
+  }
+
+  .send-score{
+    padding: 0 0.7rem;
+  }
+}

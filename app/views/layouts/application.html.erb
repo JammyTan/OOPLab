@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CourseWeb</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!--<link type="text/css" rel="stylesheet" href="/bower_components/Materialize/dist/css//materialize.min.css" media="screen,projection"/>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/bower_components/pikaday/css/pikaday.css"/>
+    <link type="text/css" rel="stylesheet" href="/bower_components/sweetalert2/dist/sweetalert2.css"/>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <!--<script src="/bower_components/Materialize/dist/js//materialize.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-aria.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bower_components/Headhesive.js/dist/headhesive.min.js"></script>
+    <script src="/bower_components/highcharts/highcharts.js"></script>
+    <script src="/bower_components/js-base64/base64.min.js"></script>
+    <script src="/bower_components/ngstorage/ngStorage.min.js"></script>
+    <script src="/bower_components/async/dist/async.js"></script>
+    <script src="/bower_components/pikaday/pikaday.js"></script>
+    <script src="/bower_components/js-yaml/dist/js-yaml.min.js"></script>
+    <script src="/vendor/jquery.newsTicker.min.js"></script>
+    <script src="/bower_components/moment/min/moment.min.js"></script>
+    <script src="/bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="/node_modules/lodash/lodash.js"></script>
+    <script src="/bower_components/sweetalert2/dist/sweetalert2.js"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <%= csrf_meta_tags %>
+
+</head>
+<body ng-app="courseWebApp">
+<%= yield %>
+</body>
+<script>
+    window._rails_env = "<%= Rails.env %>"
+</script>
+</html>
