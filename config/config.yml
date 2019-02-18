@@ -1,5 +1,6 @@
 development:
   git_app: /usr/bin/git
+  
   git_project_root: /Users/Chih-Chun_Liu/Lab/CourseWeb/repositories/git/
   git_repositories_root: /Users/Chih-Chun_Liu/Lab/CourseWeb/repositories
   url: 'http://127.0.0.1:3000'

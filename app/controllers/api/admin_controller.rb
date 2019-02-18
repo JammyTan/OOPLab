@@ -26,7 +26,9 @@ class Api::AdminController < ApplicationController
         retrieve
 
         permitted = params.permit(:course_id)
-        course_name, class_name, academic_year, students_id_list, students_name_list = NTUTCourse.login_to_nportal('104598037', 'qwerasdf40144', permitted[:course_id])
+        p "create course student......"
+
+        course_name, class_name, academic_year, students_id_list, students_name_list = NTUTCourse.login_to_nportal('107598042', 't107598042', permitted[:course_id])
         Student.transaction do
             course = Course.find_or_initialize_by(id: permitted[:course_id])
             course.update!(name: course_name, academic_year: academic_year)
